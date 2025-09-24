@@ -68,17 +68,24 @@ def interactive_loop():
         route = decide_tool_for_question(question)
 
         if route == "db":
-            # Generate SQL using LLM
+            # Generate SQLite-compatible SQL using LLM with default table context
             prompt = (
                 "You are an assistant that converts user questions into a single SQL query.\n"
                 f"User question: {question}\n"
-                "Respond ONLY with SQL on one line, no explanation."
+                "Rules:\n"
+                "1. This must be a valid SQLite query.\n"
+                "2. If the user mentions 'heart' or 'cardiac', use the 'heart' table by default.\n"
+                "3. If the user mentions 'cancer', 'tumor', or 'tumour', use the 'cancer' table by default.\n"
+                "4. If the user mentions 'diabetes' or 'glucose', use the 'diabetes' table by default.\n"
+                "5. Respond ONLY with SQL on one line, no explanation.\n"
+                "6. Assume the default table mentioned above if the database is not explicitly specified."
             )
             try:
-                sql = llm.invoke(prompt).content
+                sql = llm.invoke(prompt).content.strip()
             except Exception as e:
                 print("LLM Error:", e)
                 continue
+
 
             # Determine which DB to use
             q_lower = question.lower()
