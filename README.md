@@ -8,17 +8,21 @@ The whole process is fully automatic and interactive..
  PROJECT STRUCTURE
 
 multi-tool-medical-agent/
-├─ data/                  -> Place original CSV files here: heart.csv, cancer.csv, diabetes.csv
-├─ db/                    -> Generated SQLite DB files will be saved here
-│  ├─ heart_disease.db
-│  ├─ cancer.db
-│  └─ diabetes.db
+│
+├─ data/                      -> Place original CSV files here: heart.csv, cancer.csv, diabetes.csv
+│
+├─ db/                        -> Generated SQLite DB files will be saved here
+│   ├─ heart_disease.db
+│   ├─ cancer.db
+│   └─ diabetes.db
+│
 ├─ src/
-│  ├─ convert_csvs.py     -> Converts CSVs into SQLite DBs
-│  ├─ db_tools.py         -> Database tool wrappers
-│  ├─ web_search_tool.py  -> Web search (SerpAPI / Bing)
-│  ├─ agent_main.py       -> Main agent CLI interface
-│  └─ utils.py            -> Helper functions
+│   ├─ convert_csvs.py        -> Converts CSVs into SQLite DBs
+│   ├─ db_tools.py            -> Database tool wrappers
+│   ├─ web_search_tool.py     -> Web search (SerpAPI / Bing)
+│   ├─ agent_main.py          -> Main agent CLI interface (run this file)
+│   └─ utils.py               -> Helper functions
+│
 ├─ requirements.txt
 ├─ README.md
 └─ .env.example
