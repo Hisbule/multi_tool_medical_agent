@@ -42,6 +42,7 @@ AI Agent Routing between database and web tool
 Natural Language Interface (ask questions in plain English)
 
 ## 📝 Notes (Environment Setup)
+**⚠️ Important:** Add your API keys in the `.env` file.
 
 Before running the project, you must create a .env file in the root directory of your project to store your API keys.
 
