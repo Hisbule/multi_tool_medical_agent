@@ -68,18 +68,40 @@ def interactive_loop():
         route = decide_tool_for_question(question)
 
         if route == "db":
+                # Step 1: Determine which table to use BEFORE calling LLM
+            q_lower = question.lower()
+            if any(k in q_lower for k in ["cancer", "tumor", "tumour"]):
+                table_name = "cancer"
+                db_tool = tools[1]
+            elif any(k in q_lower for k in ["diabetes", "glucose"]):
+                table_name = "diabetes"
+                db_tool = tools[2]
+            elif any(k in q_lower for k in ["heart", "cardiac"]):
+                table_name = "heart"
+                db_tool = tools[0]
+            else:
+                # Ask user if DB is unclear
+                print("Which DB should I use? (heart/cancer/diabetes)")
+                db_choice = input("DB: ").strip().lower()
+                if db_choice == "cancer":
+                    table_name = "cancer"
+                    db_tool = tools[1]
+                elif db_choice == "diabetes":
+                    table_name = "diabetes"
+                    db_tool = tools[2]
+                else:
+                    table_name = "heart"
+                    db_tool = tools[0]
             # Generate SQLite-compatible SQL using LLM with default table context
             prompt = (
-                "You are an assistant that converts user questions into a single SQL query.\n"
-                f"User question: {question}\n"
-                "Rules:\n"
-                "1. This must be a valid SQLite query.\n"
-                "2. If the user mentions 'heart' or 'cardiac', use the 'heart' table by default.\n"
-                "3. If the user mentions 'cancer', 'tumor', or 'tumour', use the 'cancer' table by default.\n"
-                "4. If the user mentions 'diabetes' or 'glucose', use the 'diabetes' table by default.\n"
-                "5. Respond ONLY with SQL on one line, no explanation.\n"
-                "6. Assume the default table mentioned above if the database is not explicitly specified."
-            )
+                    "You are an assistant that converts user questions into a single SQL query.\n"
+                    f"User question: {question}\n"
+                    f"Use the '{table_name}' table by default.\n"
+                    "Rules:\n"
+                    "1. This must be a valid SQLite query.\n"
+                    "2. Respond ONLY with SQL on one line, no explanation."
+                     )
+
             try:
                 sql = llm.invoke(prompt).content.strip()
             except Exception as e:
