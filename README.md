@@ -1,12 +1,11 @@
-##Multi-Tool Medical Agent
+Multi-Tool Medical Agent
 
 An AI-powered CLI tool that interacts with medical datasets (heart disease, cancer, diabetes) and performs web-based medical queries.
 It is a user interface-based system where you can ask any question in plain English text — no coding required.
 If your question is related to data but you don’t mention the dataset name, the system will automatically ask you to choose a database before running the query.
 The whole process is fully automatic and interactive..
 
-
-## PROJECT STRUCTURE
+PROJECT STRUCTURE
 
 multi-tool-medical-agent/
 ├─ data/ -> Place original CSV files here: heart.csv, cancer.csv, diabetes.csv
@@ -25,7 +24,7 @@ multi-tool-medical-agent/
 └─ .env.example
 
 
-##FEATURES
+FEATURES
 
 Automatic CSV to SQLite conversion
 
@@ -38,7 +37,7 @@ AI Agent Routing between database and web tool
 Natural Language Interface (ask questions in plain English)
 
 
-##EXAMPLE RUN
+EXAMPLE RUN
 
 To run the project, simply run the main Python file: agent_main.py
 
@@ -51,6 +50,6 @@ Result:
 | 54.7        |
 
 
-##AUTHOR##
+AUTHOR
 
 Author: Hafiz Uddin Ahmed ADNAN
