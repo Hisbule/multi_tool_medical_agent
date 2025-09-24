@@ -6,3 +6,4 @@ python-dotenv
 requests
 tabulate
 serpapi
+langchain-community
